@@ -132,6 +132,11 @@ public:
    void set_din_pin(int8_t pin) { this->din_pin_ = pin; }
    int8_t get_din_pin() { return this->din_pin_; }
 
+bool read_sample(int32_t *out) {
+  size_t bytes_read;
+  return i2s_read(this->parent_->get_port(), out, sizeof(int32_t), &bytes_read, 0) == ESP_OK && bytes_read == sizeof(int32_t);
+}
+
 protected:
 #if SOC_I2S_SUPPORTS_ADC
    adc1_channel_t adc_channel_{ADC1_CHANNEL_MAX};
