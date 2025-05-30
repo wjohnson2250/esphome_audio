@@ -1,0 +1,3 @@
+platform: db_sound_meter
+type: sensor
+dependencies: [sensor, i2s_audio]

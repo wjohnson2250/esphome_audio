@@ -18,3 +18,4 @@ sdkconfig.esp32-idf
 sdkconfig.esp32-s3-idf
 
 */**/secrets.yaml
+/.vs
