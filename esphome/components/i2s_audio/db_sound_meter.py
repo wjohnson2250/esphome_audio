@@ -8,7 +8,11 @@ CONF_I2S_AUDIO_ID = "i2s_audio_id"
 db_sound_meter_ns = cg.esphome_ns.namespace("i2s_audio")
 DBSoundMeter = db_sound_meter_ns.class_("DBSoundMeter", cg.Component, sensor.Sensor)
 
-CONFIG_SCHEMA = sensor.sensor_schema(UNIT_DECIBEL, "mdi:microphone", 1).extend({
+CONFIG_SCHEMA = sensor.sensor_schema(
+    unit_of_measurement=UNIT_DECIBEL,
+    icon="mdi:microphone",
+    accuracy_decimals=1
+).extend({
     cv.GenerateID(): cv.declare_id(DBSoundMeter),
     cv.GenerateID(CONF_I2S_AUDIO_ID): cv.use_id(i2s_audio.I2SAudioComponent),
 })
