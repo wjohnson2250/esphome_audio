@@ -1,6 +1,7 @@
 #include "db_sound_meter.h"
 #include "esphome/core/log.h"
 #include <cmath>
+#include <Arduino.h>  // for millis()
 
 namespace esphome {
 namespace db_sound_meter {
