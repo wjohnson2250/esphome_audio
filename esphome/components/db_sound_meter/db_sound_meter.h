@@ -1,4 +1,10 @@
+#pragma once
+
+#include "esphome/components/sensor/sensor.h"
 #include "esphome/core/component.h"
+
+namespace esphome {
+namespace db_sound_meter {
 
 class DBSoundMeter : public sensor::Sensor, public Component {
  public:
@@ -8,7 +14,10 @@ class DBSoundMeter : public sensor::Sensor, public Component {
   void loop() override;
 
  protected:
-  I2SAudioComponent *parent_;
+  I2SAudioComponent *parent_{nullptr};
   uint32_t update_interval_{1000};
   uint32_t last_update_{0};
 };
+
+}  // namespace db_sound_meter
+}  // namespace esphome
