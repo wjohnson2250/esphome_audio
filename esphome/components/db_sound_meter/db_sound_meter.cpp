@@ -1,7 +1,10 @@
 #include "db_sound_meter.h"
 #include "esphome/core/log.h"
 #include <cmath>
-#include <Arduino.h>  // for millis()
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+
+static inline uint32_t millis() { return (uint32_t) (xTaskGetTickCount() * portTICK_PERIOD_MS); }
 
 namespace esphome {
 namespace db_sound_meter {
