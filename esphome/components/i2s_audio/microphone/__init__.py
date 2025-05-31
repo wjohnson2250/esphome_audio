@@ -29,6 +29,12 @@ CONF_SAMPLE_RATE = "sample_rate"
 CONF_BITS_PER_SAMPLE = "bits_per_sample"
 CONF_USE_APLL = "use_apll"
 
+# Create the i2s_audio namespace
+i2s_audio_ns = cg.esphome_ns.namespace('i2s_audio')
+
+# Declare I2SReader so it can be used as a base class
+I2SReader = i2s_audio_ns.class_('I2SReader')
+
 I2SAudioMicrophone = i2s_audio_ns.class_(
     "I2SAudioMicrophone", I2SReader, microphone.Microphone, cg.Component
 )

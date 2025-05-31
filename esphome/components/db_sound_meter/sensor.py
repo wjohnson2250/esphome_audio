@@ -2,6 +2,7 @@ import esphome.codegen as cg
 import esphome.config_validation as cv
 from esphome.components import sensor
 from esphome.const import UNIT_DECIBEL
+from esphome.components.i2s_audio import I2SAudioMicrophone
 
 db_sound_meter_ns = cg.esphome_ns.namespace('db_sound_meter')
 DBSoundMeter = db_sound_meter_ns.class_('DBSoundMeter', cg.Component, sensor.Sensor)
@@ -13,7 +14,7 @@ CONFIG_SCHEMA = sensor.sensor_schema(
     icon='mdi:microphone',
     accuracy_decimals=1,
 ).extend({
-    cv.Required(CONF_MIC_ID): cv.declare_id(),  # Declare this as a reference ID to another component
+    cv.Required(CONF_MIC_ID): cv.declare_id(I2SAudioMicrophone),  # Declare this as a reference ID to another component
     cv.GenerateID(): cv.declare_id(DBSoundMeter),
 })
 
