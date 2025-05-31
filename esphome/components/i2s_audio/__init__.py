@@ -48,6 +48,11 @@ CONF_I2S_ADC = "adc"
 i2s_audio_ns = cg.esphome_ns.namespace("i2s_audio")
 I2SAudioComponent = i2s_audio_ns.class_("I2SAudioComponent", cg.Component)
 
+I2SReader = i2s_audio_ns.class_('I2SReader')
+I2SAudioMicrophone = i2s_audio_ns.class_(
+    'I2SAudioMicrophone', I2SReader, microphone.Microphone, cg.Component
+)
+
 # https://github.com/espressif/esp-idf/blob/master/components/soc/{variant}/include/soc/soc_caps.h
 I2S_PORTS = {
     VARIANT_ESP32: 2,
