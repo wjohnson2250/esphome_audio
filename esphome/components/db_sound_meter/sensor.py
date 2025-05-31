@@ -13,7 +13,7 @@ CONFIG_SCHEMA = sensor.sensor_schema(
     icon='mdi:microphone',
     accuracy_decimals=1,
 ).extend({
-    cv.Required(CONF_MIC_ID): cv.string,  # Accept string ID
+    cv.Required(CONF_MIC_ID): cv.string,
     cv.GenerateID(): cv.declare_id(DBSoundMeter),
 })
 
@@ -22,5 +22,5 @@ async def to_code(config):
     await cg.register_component(var, config)
 
     mic_id = config[CONF_MIC_ID]
-    mic = await cg.get_variable(cg.ID(mic_id))  # Convert string to ID here
+    mic = await cg.get_variable(mic_id)  # Pass string directly
     cg.add(var.register_callback(mic))
