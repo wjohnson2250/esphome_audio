@@ -22,5 +22,6 @@ async def to_code(config):
     var = await sensor.new_sensor(config)
     await cg.register_component(var, config)
 
-    mic = await cg.get_variable(config[CONF_MIC_ID])  # config[CONF_MIC_ID] is already an ID object
+    mic_id = config[CONF_MIC_ID]
+    mic = await cg.get_variable(mic_id)  # Pass string directly
     cg.add(var.register_callback(mic))
