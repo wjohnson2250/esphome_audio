@@ -1,12 +1,12 @@
 import esphome.codegen as cg
 import esphome.config_validation as cv
 from esphome.components import sensor, i2s_audio
-from esphome.const import CONF_ID, CONF_NAME, UNIT_DECIBEL
+from esphome.const import CONF_ID, UNIT_DECIBEL
 
 CONF_I2S_AUDIO_ID = "i2s_audio_id"
 
 db_sound_meter_ns = cg.esphome_ns.namespace("db_sound_meter")
-DBSoundMeter = db_sound_meter_ns.class_("DBSoundMeter", cg.Component, sensor.Sensor, i2s_audio.AudioSink)
+DBSoundMeter = db_sound_meter_ns.class_("DBSoundMeter", cg.Component, sensor.Sensor)
 
 CONFIG_SCHEMA = sensor.sensor_schema(
     unit_of_measurement=UNIT_DECIBEL,
