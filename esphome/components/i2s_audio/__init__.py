@@ -1,4 +1,5 @@
 from collections import defaultdict
+from esphome.components import microphone
 
 import esphome.config_validation as cv
 import esphome.final_validate as fv
@@ -52,6 +53,8 @@ I2SReader = i2s_audio_ns.class_('I2SReader')
 I2SAudioMicrophone = i2s_audio_ns.class_(
     'I2SAudioMicrophone', I2SReader, microphone.Microphone, cg.Component
 )
+
+__all__ = ['I2SAudioComponent', 'I2SReader', 'I2SAudioMicrophone']
 
 # https://github.com/espressif/esp-idf/blob/master/components/soc/{variant}/include/soc/soc_caps.h
 I2S_PORTS = {
