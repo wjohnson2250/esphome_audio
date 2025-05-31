@@ -1,7 +1,7 @@
 import esphome.codegen as cg
 import esphome.config_validation as cv
 from esphome.components import sensor, i2s_audio
-from esphome.const import CONF_ID, UNIT_DECIBEL
+from esphome.const import UNIT_DECIBEL
 
 CONF_I2S_AUDIO_ID = "i2s_audio_id"
 
