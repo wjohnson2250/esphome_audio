@@ -1,9 +1,9 @@
 from collections import defaultdict
-from esphome.components import microphone
 
 import esphome.config_validation as cv
 import esphome.final_validate as fv
 import esphome.codegen as cg
+from esphome.components import microphone
 
 from esphome import pins
 from esphome.components import i2c
@@ -47,6 +47,7 @@ CONF_I2S_DAC = "dac"
 CONF_I2S_ADC = "adc"
 
 i2s_audio_ns = cg.esphome_ns.namespace("i2s_audio")
+
 I2SAudioComponent = i2s_audio_ns.class_("I2SAudioComponent", cg.Component)
 
 I2SReader = i2s_audio_ns.class_('I2SReader')
