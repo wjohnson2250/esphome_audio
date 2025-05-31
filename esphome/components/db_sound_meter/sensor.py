@@ -15,7 +15,9 @@ CONFIG_SCHEMA = sensor.sensor_schema(
     icon='mdi:microphone',
     accuracy_decimals=1,
 ).extend({
-    cv.Required(CONF_MIC_ID): cv.use_id(i2s_audio.I2SAudioMicrophone),
+    #cv.Required(CONF_MIC_ID): cv.use_id(i2s_audio.I2SAudioMicrophone),
+    cv.Required(CONF_MIC_ID): cv.id(),
+
 })
 
 async def to_code(config):
