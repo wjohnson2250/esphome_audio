@@ -11,30 +11,31 @@ namespace db_sound_meter {
 
 static const char *TAG = "db_sound_meter";
 
-void DBSoundMeter::setup() { this->last_update_ = millis(); }
-
-void DBSoundMeter::loop() {
-  uint32_t now = millis();
-  if (now - this->last_update_ < this->update_interval_) {
-    return;
+void DBSoundMeter::setup() {
+  if (parent_ != nullptr) {
+    parent_->add_sink(this);
   }
-  this->last_update_ = now;
+}
 
-  const int16_t *buffer = parent_->get_buffer();
-  size_t length = parent_->get_buffer_length();
-  if (buffer == nullptr || length == 0)
+void DBSoundMeter::write(audio_frame_t *frame) {
+  if (!frame)
     return;
 
-  float square_sum = 0;
-  for (size_t i = 0; i < length; i++) {
-    float sample = buffer[i] / 32768.0f;
+  const int16_t *data = reinterpret_cast<const int16_t *>(frame->data);
+  size_t samples = frame->samples * frame->channels;
+
+  float square_sum = 0.0f;
+  for (size_t i = 0; i < samples; i++) {
+    float sample = data[i] / 32768.0f;
     square_sum += sample * sample;
   }
 
-  float rms = sqrtf(square_sum / length);
+  float rms = sqrtf(square_sum / samples);
   float db = 20.0f * log10f(rms + 1e-6f);
 
   this->publish_state(db);
+
+  ESP_LOGD(TAG, "Sound level: %.2f dB", db);
 }
 
 }  // namespace db_sound_meter
