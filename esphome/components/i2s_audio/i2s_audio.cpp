@@ -2,6 +2,14 @@
 
 #ifdef USE_ESP32
 
+#include "soc/soc_caps.h"
+
+#if defined(USE_ESP_IDF) && (ESP_IDF_VERSION_MAJOR >= 5)
+#ifndef I2S_NUM_MAX
+#define I2S_NUM_MAX SOC_I2S_NUM
+#endif
+#endif
+
 #include "esphome/core/log.h"
 
 namespace esphome {
