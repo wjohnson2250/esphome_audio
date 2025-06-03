@@ -41,6 +41,8 @@ void I2SAudioMicrophone::dump_config() {
 }
 
 void I2SAudioMicrophone::start() {
+  ESP_LOGD("sound_level", "Starting microphone");
+
   if (this->is_failed())
     return;
   if (this->state_ == microphone::STATE_RUNNING)
@@ -142,7 +144,12 @@ void I2SAudioMicrophone::read_() {
   std::vector<int16_t> samples;
   samples.resize(BUFFER_SIZE);
   size_t bytes_read = this->read(samples.data(), BUFFER_SIZE / sizeof(int16_t));
+  ESP_LOGD("i2s_audio_microphone", "read_() called with %u bytes", bytes_read);
+
   samples.resize(bytes_read / sizeof(int16_t));
+
+  ESP_LOGD("i2s_audio_microphone", "Calling data_callbacks_ with %d samples", samples.size());
+
   this->data_callbacks_.call(
       std::vector<uint8_t>(reinterpret_cast<uint8_t *>(samples.data()),
                            reinterpret_cast<uint8_t *>(samples.data()) + samples.size() * sizeof(int16_t)
